@@ -115,6 +115,14 @@ public extension IEth {
 }
 
 public extension IEth {
+    func getMaxPriorityFeePerGas() async throws -> BigUInt {
+        let request = Web3Core.APIRequest.getMaxPriorityFeePerGas
+        return try await Web3Core.APIRequest.sendRequest(with: provider, for: request).result
+    }
+}
+
+
+public extension IEth {
     func ownedAccounts() async throws -> [EthereumAddress] {
         if let addresses = provider.attachedKeystoreManager?.addresses {
             return addresses
