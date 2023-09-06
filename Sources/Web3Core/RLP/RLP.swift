@@ -18,6 +18,10 @@ public struct RLP {
     static var length56 = BigUInt(UInt(56))
     static var lengthMax = (BigUInt(UInt(1)) << 256)
 
+    public static func encodeForSignature(_ elements: [Any?]) -> Data? {
+        return encode(elements)
+    }
+
     internal static func encode(element: Any?) -> Data? {
         if let string = element as? String {
             return encode(string)
