@@ -192,9 +192,6 @@ public enum APIRequest {
     ///         For each block in the requested range, the transactions will be sorted in ascending order
     ///         by effective tip per gas and the corresponding effective tip for the percentile will be determined, accounting for gas consumed."
     case feeHistory(BigUInt, BlockNumber, [Double])
-
-    /// Get a maxPriorityFeePerGas
-    case getMaxPriorityFeePerGas
     
     // MARK: - Personal Ethereum API
     // personal Namespace - https://geth.ethereum.org/docs/rpc/ns-personal
@@ -226,4 +223,54 @@ public enum APIRequest {
     // tx Namespace - https://geth.ethereum.org/docs/rpc/ns-txpool
     case getTxPoolStatus // No in Eth API
     case getTxPoolContent // No in Eth API
+    
+    // MARK: - Custom Ethereum API
+    
+    case customRequest(method: String, parameter: [CustomRequestParameter])
+    
+    /// Get a maxPriorityFeePerGas
+    case getMaxPriorityFeePerGas
+}
+
+
+public enum CustomRequestParameter {
+    case int(Int)
+    case intArray([Int])
+    
+    case uint(UInt)
+    case uintArray([UInt])
+    
+    case double(Double)
+    case doubleArray([Double])
+    
+    case string(String)
+    case stringArray([String])
+    
+    case bool(Bool)
+    case boolArray([Bool])
+    
+    func requestParameter() -> RequestParameter {
+        switch self {
+        case .int(let value):
+            return .int(value)
+        case .intArray(let values):
+            return .intArray(values)
+        case .uint(let value):
+            return .uint(value)
+        case .uintArray(let values):
+            return .uintArray(values)
+        case .double(let value):
+            return .double(value)
+        case .doubleArray(let values):
+            return .doubleArray(values)
+        case .string(let value):
+            return .string(value)
+        case .stringArray(let values):
+            return .stringArray(values)
+        case .bool(let value):
+            return .bool(value)
+        case .boolArray(let values):
+            return .boolArray(values)
+        }
+    }
 }
