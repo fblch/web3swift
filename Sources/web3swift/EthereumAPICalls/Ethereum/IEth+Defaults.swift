@@ -157,13 +157,9 @@ public extension IEth {
 }
 
 public extension IEth {
-    func getMaxPriorityFeePerGas() async throws -> BigUInt {
-        let request = Web3Core.APIRequest.getMaxPriorityFeePerGas
-        return try await Web3Core.APIRequest.sendRequest(with: provider, for: request).result
-    }
     
-    func getCustomValue<T: APIResultType>(method: String, parameters: [CustomRequestParameter]) async throws -> T {
-        let request = Web3Core.APIRequest.customRequest(method: method, parameter: parameters)
+    func getCustomResult<T: APIResultType>(call: String, parameters: [PublishedRequestParameter]) async throws -> T {
+        let request = Web3Core.APIRequest.customResult(call: call, parameter: parameters)
         return try await Web3Core.APIRequest.sendRequest(with: provider, for: request).result
     }
 }
