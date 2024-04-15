@@ -17,7 +17,6 @@ public protocol IEth {
     func feeHistory(blockCount: BigUInt, block: BlockNumber, percentiles: [Double]) async throws -> Oracle.FeeHistory
     func ownedAccounts() async throws -> [EthereumAddress]
     func getBalance(for address: EthereumAddress, onBlock: BlockNumber) async throws -> BigUInt
-    func getMaxPriorityFeePerGas() async throws -> BigUInt
 
     func block(by hash: Data, fullTransactions: Bool) async throws -> Block
     func block(by number: BlockNumber, fullTransactions: Bool) async throws -> Block
