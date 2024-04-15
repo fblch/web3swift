@@ -71,6 +71,9 @@ extension APIRequest {
 
         case .unlockAccount(let address, let string, let uInt):
             return [.string(address), .string(string), .uint(uInt ?? 0)]
+            
+        case .customRequest(_, let parameters):
+            return parameters.map({ $0.requestParameter() })
         }
     }
 
@@ -101,6 +104,8 @@ extension APIRequest {
         case .createAccount: return "personal_createAccount"
         case .getTxPoolStatus: return "txpool_status"
         case .getTxPoolContent: return "txpool_content"
+            
+        case .customRequest(let method, _): return method
         }
     }
 }
